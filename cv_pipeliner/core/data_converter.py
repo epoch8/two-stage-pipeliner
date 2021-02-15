@@ -57,8 +57,7 @@ class DataConverter(abc.ABC):
                     continue
 
                 if data_converter.class_mapper is not None:
-                    if bbox_data.label in data_converter.class_mapper:
-                        bbox_data.label = data_converter.class_mapper[bbox_data.label]
+                    bbox_data.label = data_converter.class_mapper[bbox_data.label]
                 if (
                     data_converter.class_names is not None and
                     (
