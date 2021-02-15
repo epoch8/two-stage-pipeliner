@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import Literal, List
 
 import numpy as np
-from tqdm import tqdm
 
 from cv_pipeliner.core.data import BboxData, ImageData
 
@@ -209,7 +208,7 @@ class ImageDataMatching:
 
         pairwise_ious = pairwise_intersection_over_union(true_bboxes_data, bboxes_data)
 
-        for idx, true_bbox_data in tqdm(list(enumerate(true_bboxes_data))):
+        for idx, true_bbox_data in enumerate(true_bboxes_data):
             best_pred_bbox_column = np.argmax(pairwise_ious[idx, :])
 
             if best_pred_bbox_column is not None:
