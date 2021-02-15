@@ -37,8 +37,6 @@ def pairwise_intersection_over_union(
     ])
     A = A[:, None]
     B = B[None]
-    print(f"{A.shape=}")
-    print(f"{B.shape=}")
     A[high] += 1
     B[high] += 1
     interactions = np.prod(
