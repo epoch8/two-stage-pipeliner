@@ -381,19 +381,19 @@ def test_image_data_matching_pipeline():
         assert df_pipeline_metrics.loc['mango', 'FP (extra bbox)'] == 1
         assert df_pipeline_metrics.loc['mango', 'FN (extra bbox)'] == 0
 
-        if tag in [tag_with_extra_bbox_label_other, tag_known_banana_apple_with_extra_bbox_label_other]:
-            df_pipeline_metrics.loc['other (pseudo-class)', 'TP'] == 0
-            df_pipeline_metrics.loc['other (pseudo-class)', 'FP'] == 0
-            df_pipeline_metrics.loc['other (pseudo-class)', 'FN'] == 0
-            df_pipeline_metrics.loc['other (pseudo-class)', 'TP (extra bbox)'] == 0
-            df_pipeline_metrics.loc['other (pseudo-class)', 'FP (extra bbox)'] == 0
-            df_pipeline_metrics.loc['other (pseudo-class)', 'FN (extra bbox)'] == 0
-            df_pipeline_metrics.loc['other (extra bbox)', 'TP'] == 0
-            df_pipeline_metrics.loc['other (extra bbox)', 'FP'] == 0
-            df_pipeline_metrics.loc['other (extra bbox)', 'FN'] == 0
-            df_pipeline_metrics.loc['other (extra bbox)', 'TP (extra bbox)'] == 2
-            df_pipeline_metrics.loc['other (extra bbox)', 'FP (extra bbox)'] == 0
-            df_pipeline_metrics.loc['other (extra bbox)', 'FN (extra bbox)'] == 3
+        # if tag in [tag_with_extra_bbox_label_other, tag_known_banana_apple_with_extra_bbox_label_other]:
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'TP'] == 0
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'FP'] == 0
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'FN'] == 0
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'TP (extra bbox)'] == 0
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'FP (extra bbox)'] == 0
+        #     df_pipeline_metrics.loc['other (pseudo-class)', 'FN (extra bbox)'] == 0
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'TP'] == 0
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'FP'] == 0
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'FN'] == 0
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'TP (extra bbox)'] == 2
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'FP (extra bbox)'] == 0
+        #     df_pipeline_metrics.loc['other (extra bbox)', 'FN (extra bbox)'] == 3
 
         for label in [None, 'apple', 'banana', 'mango', 'other']:
             Image.fromarray(

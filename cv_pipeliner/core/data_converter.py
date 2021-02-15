@@ -35,6 +35,18 @@ class DataConverter(abc.ABC):
                 return None
             looked_bboxes = set()
             new_bboxes_data = []
+
+            if data_converter.class_mapper is not None:
+                unknown_labels = set([
+                    bbox_data.label for bbox_data in image_data.bboxes_data
+                    if bbox_data.label not in data_converter.class_mapper
+                ])
+                if len(unknown_labels) > 0:
+                    raise ValueError(
+                        f"The following class_names are not in class_mapper:\n{unknown_labels}\n"
+                        "Please add them to class_mapper"
+                    )
+
             for bbox_data in image_data.bboxes_data:
                 xmin, ymin, xmax, ymax = bbox_data.xmin, bbox_data.ymin, bbox_data.xmax, bbox_data.ymax
                 xmin, ymin, xmax, ymax = int(xmin), int(ymin), int(xmax), int(ymax)
