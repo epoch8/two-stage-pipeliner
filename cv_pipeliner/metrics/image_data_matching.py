@@ -211,13 +211,12 @@ class ImageDataMatching:
         for idx, true_bbox_data in enumerate(true_bboxes_data):
             best_pred_bbox_column = np.argmax(pairwise_ious[idx, :])
 
-            if best_pred_bbox_column is not None:
-                if pairwise_ious[idx, best_pred_bbox_column] >= minimum_iou:
-                    # Remove pred_bbox_data from pairwise matrix
-                    pairwise_ious[:, best_pred_bbox_column] = -1
-                    remained_pred_bboxes_data.remove(best_pred_bbox_column)
-                else:
-                    best_pred_bbox_column = None
+            if pairwise_ious[idx, best_pred_bbox_column] >= minimum_iou:
+                # Remove pred_bbox_data from pairwise matrix
+                pairwise_ious[:, best_pred_bbox_column] = -1
+                remained_pred_bboxes_data.remove(best_pred_bbox_column)
+            else:
+                best_pred_bbox_column = None
 
             if best_pred_bbox_column is not None:  # Not found
                 bboxes_data_matchings.append(BboxDataMatching(
@@ -343,3 +342,4 @@ class ImageDataMatching:
         bbox_data_matching_index = bboxes_data_coords_from_matchings.index((xmin, ymin, xmax, ymax))
 
         return self.bboxes_data_matchings[bbox_data_matching_index]
+>>>>>>> WIP
