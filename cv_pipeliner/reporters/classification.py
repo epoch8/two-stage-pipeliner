@@ -242,7 +242,7 @@ classification_interactive_work(
         n_true_bboxes_data: List[List[BboxData]],
         pseudo_class_names: List[str],
         batch_size: int = 16,
-    ) -> List[ClassificationReporter]:
+    ) -> List[ClassificationReportData]:
         for model_spec in models_specs:
             if hasattr(model_spec, 'preprocess_input'):
                 assert (
@@ -294,7 +294,7 @@ classification_interactive_work(
         compare_tag: str,
         output_directory: Union[str, Path],
         pseudo_class_names: List[str],
-    ) -> List[ClassificationReporter]:
+    ) -> List[ClassificationReportData]:
 
         logger.info(f"Cunting metrics for '{tag}'...")
         tag_df_classification_metrics = get_df_classification_metrics(

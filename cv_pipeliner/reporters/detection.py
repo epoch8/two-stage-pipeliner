@@ -332,7 +332,7 @@ detection_interactive_work(
         tag: str,
         output_directory: Union[str, Path],
         minimum_iou: float,
-    ):
+    ) -> List[DetectionReportData]:
 
         logger.info(f"Counting metrics for '{tag}'...")
         tag_df_detection_metrics = get_df_detection_metrics(
@@ -367,3 +367,4 @@ detection_interactive_work(
             markdowns=markdowns,
             codes=[]
         )
+        return detections_reports_datas

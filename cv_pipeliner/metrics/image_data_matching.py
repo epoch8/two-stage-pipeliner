@@ -342,4 +342,3 @@ class ImageDataMatching:
         bbox_data_matching_index = bboxes_data_coords_from_matchings.index((xmin, ymin, xmax, ymax))
 
         return self.bboxes_data_matchings[bbox_data_matching_index]
->>>>>>> WIP
