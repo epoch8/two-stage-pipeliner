@@ -252,23 +252,23 @@ class PipelineReporter(Reporter):
         )
         markdowns.append(
             '## Detection metrics\n'
-            f'{pipeline_report_data.df_detection_metrics_short.to_markdown(stralign="center")}''\n'
+            f'{pipeline_report_data.df_detection_metrics_short.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '## Pipeline metrics (weighted average)\n'
-            f'{pipeline_report_data.df_pipeline_metrics_short.to_markdown(stralign="center")}''\n'
+            f'{pipeline_report_data.df_pipeline_metrics_short.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '## Correct pipeline predictions in absolute values\n'
-            f'{pipeline_report_data.df_correct_preds.to_markdown(stralign="center")}''\n'
+            f'{pipeline_report_data.df_correct_preds.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '## Main pipeline errors in absolute values\n'
-            f'{pipeline_report_data.df_incorrect_preds.to_markdown(stralign="center")}''\n'
+            f'{pipeline_report_data.df_incorrect_preds.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '## Percentage of errors\n'
-            f'{pipeline_report_data.df_incorrect_preds_percentage.to_markdown(stralign="center")}''\n'
+            f'{pipeline_report_data.df_incorrect_preds_percentage.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '---'
@@ -424,7 +424,7 @@ pipeline_interactive_work(
         pseudo_class_names: List[str],
         batch_size: int = 16,
         cut_by_bboxes: List[Tuple[int, int, int, int]] = None
-    ):
+    ) -> List[PipelineReportData]:
         assert len(models_specs) == len(tags)
         assert len(tags) == len(detection_scores_thresholds)
         assert len(detection_scores_thresholds) == len(extra_bbox_labels)
@@ -482,6 +482,7 @@ pipeline_interactive_work(
             markdowns=markdowns,
             codes=codes
         )
+        return pipelines_reports_datas
 
     def report_on_predictions(
         self,
@@ -495,7 +496,7 @@ pipeline_interactive_work(
         output_directory: Union[str, Path],
         minimum_iou: float,
         pseudo_class_names: List[str],
-    ):
+    ) -> List[PipelineReportData]:
         pipelines_reports_datas = []
         logger.info(f"Counting metrics for '{tag}'...")
         tag_df_detection_metrics = get_df_detection_metrics(
@@ -535,3 +536,4 @@ pipeline_interactive_work(
             markdowns=markdowns,
             codes=[]
         )
+        return pipelines_reports_datas

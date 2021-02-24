@@ -140,7 +140,7 @@ class ClassificationReporter(Reporter):
         )
         markdowns.append(
             '## General classification metrics\n'
-            f'{classification_report_data.df_classification_metrics_short.to_markdown(stralign="center")}''\n'
+            f'{classification_report_data.df_classification_metrics_short.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '---'
@@ -242,7 +242,7 @@ classification_interactive_work(
         n_true_bboxes_data: List[List[BboxData]],
         pseudo_class_names: List[str],
         batch_size: int = 16,
-    ):
+    ) -> List[ClassificationReporter]:
         for model_spec in models_specs:
             if hasattr(model_spec, 'preprocess_input'):
                 assert (
@@ -283,6 +283,7 @@ classification_interactive_work(
             markdowns=markdowns,
             codes=codes
         )
+        return classifications_reports_datas
 
     def report_on_predictions(
         self,
@@ -293,7 +294,7 @@ classification_interactive_work(
         compare_tag: str,
         output_directory: Union[str, Path],
         pseudo_class_names: List[str],
-    ):
+    ) -> List[ClassificationReporter]:
 
         logger.info(f"Cunting metrics for '{tag}'...")
         tag_df_classification_metrics = get_df_classification_metrics(
@@ -323,3 +324,4 @@ classification_interactive_work(
             markdowns=markdowns,
             codes=[]
         )
+        return classifications_reports_datas

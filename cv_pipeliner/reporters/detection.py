@@ -155,14 +155,14 @@ class DetectionReporter(Reporter):
         )
         markdowns.append(
             '## General detector metrics\n'
-            f'{detection_report_data.df_detection_metrics_short.to_markdown(stralign="center")}''\n'
+            f'{detection_report_data.df_detection_metrics_short.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '---'
         )
         markdowns.append(
             '## Common detector metrics\n'
-            f'{detection_report_data.df_detection_metrics.to_markdown(stralign="center")}''\n'
+            f'{detection_report_data.df_detection_metrics.T.to_markdown(stralign="center")}''\n'
         )
         markdowns.append(
             '## Recall by class\n'
@@ -279,7 +279,7 @@ detection_interactive_work(
         minimum_iou: float,
         batch_size: int = 16,
         cut_by_bboxes: List[Tuple[int, int, int, int]] = None
-    ):
+    ) -> List[DetectionReportData]:
         assert len(models_specs) == len(tags)
         assert len(tags) == len(scores_thresholds)
         assert compare_tag in tags
@@ -322,6 +322,7 @@ detection_interactive_work(
             markdowns=markdowns,
             codes=codes
         )
+        return detections_reports_datas
 
     def report_on_predictions(
         self,
