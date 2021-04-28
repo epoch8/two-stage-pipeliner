@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='cv_pipeliner',
-    version='0.6.1',
+    version='0.6.2',
     include_package_data=True,
     packages=setuptools.find_packages(),
     install_requires=[
