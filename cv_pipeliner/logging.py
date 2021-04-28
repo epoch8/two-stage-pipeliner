@@ -18,8 +18,7 @@ if os.environ.get('CV_PIPELINER_LOGGING', False):
         "%(asctime)s [%(name)s] [%(levelname)s] %(message)s"
     )
 
-    file_handler = logging.FileHandler(LOGS_DIRECTORY / LOG_FILENAME,
-                                    encoding='utf-8')
+    file_handler = logging.FileHandler(LOGS_DIRECTORY / LOG_FILENAME, encoding='utf-8')
     file_handler.setFormatter(formatter)
     file_handler.setLevel(logging.INFO)
     logger.addHandler(file_handler)
